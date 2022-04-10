@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yun.server.mapper.AdminMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uin.server.mapper.AdminMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yun.server.pojo.Admin">
+    <resultMap id="BaseResultMap" type="com.uin.server.pojo.Admin">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="phone" property="phone"/>
@@ -16,8 +17,8 @@
         <result column="remark" property="remark"/>
     </resultMap>
 
-    <resultMap id="AdminWithRole" type="com.yun.server.pojo.Admin" extends="BaseResultMap">
-        <collection property="roles" ofType="com.yun.server.pojo.Role">
+    <resultMap id="AdminWithRole" type="com.uin.server.pojo.Admin" extends="BaseResultMap">
+        <collection property="roles" ofType="com.uin.server.pojo.Role">
             <id column="rid" property="id"/>
             <result column="rname" property="name"/>
             <result column="rnameZh" property="nameZh"/>
@@ -32,18 +33,18 @@
     <!-- 获取所有操作员 -->
     <select id="getAllAdmins" resultMap="AdminWithRole">
         select
-            a.*,
-            r.id AS rid,
-            r.name AS rname,
-            r.namezh AS rnameZh
+        a.*,
+        r.id AS rid,
+        r.name AS rname,
+        r.namezh AS rnameZh
         FROM
-            t_admin a
+        yeb.t_admin a
         LEFT JOIN
-            t_admin_role as ar ON a.id = ar.`adminid`
+        yeb.t_admin_role as ar ON a.id = ar.`adminid`
         LEFT JOIN
-            t_role r ON r.id = ar.`rid`
+        yeb.t_role r ON r.id = ar.`rid`
         WHERE
-            a.id !=#{id}
+        a.id !=#{id}
         <!-- 不传关键字 查所有 -->
         <if test="null!=keywords and ''!=keywords">
             AND a.`name` LIKE CONCAT('%',#{keywords}, '%')

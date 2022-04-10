@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yun.server.mapper.EmployeeMapper">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uin.server.mapper.EmployeeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yun.server.pojo.Employee">
+    <resultMap id="BaseResultMap" type="com.uin.server.pojo.Employee">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="gender" property="gender"/>
@@ -35,31 +36,31 @@
         <result column="salaryId" property="salaryId"/>
     </resultMap>
 
-    <resultMap id="EmployeeInfo" type="com.yun.server.pojo.Employee" extends="BaseResultMap">
-        <association property="nation" javaType="com.yun.server.pojo.Nation">
+    <resultMap id="EmployeeInfo" type="com.uin.server.pojo.Employee" extends="BaseResultMap">
+        <association property="nation" javaType="com.uin.server.pojo.Nation">
             <id column="nid" property="id"/>
             <result column="nname" property="name"/>
         </association>
-        <association property="politicsStatus" javaType="com.yun.server.pojo.PoliticsStatus">
+        <association property="politicsStatus" javaType="com.uin.server.pojo.PoliticsStatus">
             <id column="pid" property="id"/>
             <result column="pname" property="name"/>
         </association>
-        <association property="department" javaType="com.yun.server.pojo.Department">
+        <association property="department" javaType="com.uin.server.pojo.Department">
             <id column="did" property="id"/>
             <result column="dname" property="name"/>
         </association>
-        <association property="joblevel" javaType="com.yun.server.pojo.Joblevel">
+        <association property="joblevel" javaType="com.uin.server.pojo.Joblevel">
             <id column="jid" property="id"/>
             <result column="jname" property="name"/>
         </association>
-        <association property="position" javaType="com.yun.server.pojo.Position">
+        <association property="position" javaType="com.uin.server.pojo.Position">
             <id column="posid" property="id"/>
             <result column="posname" property="name"/>
         </association>
     </resultMap>
 
-    <resultMap id="EmployeeWithSalary" type="com.yun.server.pojo.Employee" extends="BaseResultMap">
-        <association property="salary" javaType="com.yun.server.pojo.Salary">
+    <resultMap id="EmployeeWithSalary" type="com.uin.server.pojo.Employee" extends="BaseResultMap">
+        <association property="salary" javaType="com.uin.server.pojo.Salary">
             <id column="sid" property="id"/>
             <result column="sbasicSalary" property="basicSalary"/>
             <result column="sbonus" property="bonus"/>
@@ -74,7 +75,7 @@
             <result column="saccumulationFundPer" property="accumulationFundPer"/>
             <result column="sname" property="name"/>
         </association>
-        <association property="department" javaType="com.yun.server.pojo.Department">
+        <association property="department" javaType="com.uin.server.pojo.Department">
             <result column="dname" property="name"/>
         </association>
     </resultMap>
@@ -101,12 +102,12 @@
         pos.id as posid,
         pos.name as posname
         from
-        t_employee e,
-        t_nation n,
-        t_politics_status p,
-        t_department d,
-        t_joblevel j,
-        t_position pos
+        yeb.t_employee e,
+        yeb.t_nation n,
+        yeb.t_politics_status p,
+        yeb.t_department d,
+        yeb.t_joblevel j,
+        yeb.t_position pos
         where
         e.nationId = n.id
         and e.politicId = p.id
@@ -154,12 +155,12 @@
         pos.id as posid,
         pos.name as posname
         from
-        t_employee e,
-        t_nation n,
-        t_politics_status p,
-        t_department d,
-        t_joblevel j,
-        t_position pos
+        yeb.t_employee e,
+        yeb.t_nation n,
+        yeb.t_politics_status p,
+        yeb.t_department d,
+        yeb.t_joblevel j,
+        yeb.t_position pos
         where
         e.nationId = n.id
         and e.politicId = p.id
@@ -189,9 +190,9 @@
                s.medicalBase          AS smedicalBase,
                s.accumulationFundPer  AS saccumulationFundPer,
                s.accumulationFundBase AS saccumulationFundBase
-        FROM t_employee as e
-                 LEFT JOIN t_salary as s ON e.salaryId = s.id
-                 LEFT JOIN t_department as td ON e.departmentId = td.id
+        FROM yeb.t_employee as e
+                 LEFT JOIN yeb.t_salary as s ON e.salaryId = s.id
+                 LEFT JOIN yeb.t_department as td ON e.departmentId = td.id
         ORDER BY e.id
     </select>
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yun.server.mapper.AdminRoleMapper">
+<mapper namespace="com.uin.server.mapper.AdminRoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.yun.server.pojo.AdminRole">
+    <resultMap id="BaseResultMap" type="com.uin.server.pojo.AdminRole">
         <id column="id" property="id"/>
         <result column="adminId" property="adminId"/>
         <result column="rid" property="rid"/>
@@ -15,7 +15,7 @@
     </sql>
     <!--更新操作员角色-->
     <update id="addAdminRole">
-        insert into t_admin_role(adminId,rid) values
+        insert into yeb.t_admin_role(adminId,rid) values
         <foreach collection="rids" item="rid" separator=",">
             (#{adminId},#{rid})
         </foreach>
