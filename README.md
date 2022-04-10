@@ -11,5 +11,34 @@
 ## 技术栈
 <img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204101420283.png" alt="image-20220410141656163" style="zoom:50%;" />
 
-## 补充说明
-正在补充中。。。
+## 相关技术学习
+
+#### RabbitMQ教学视频笔记和源码
+
+
+
+
+#### 分布式文件系统FastDFS学习
+
+[2021B站最新FastDFS教程 --分布式文件系统FastDFS入门到实战视频精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1gh411z7kJ?spm_id_from=333.337.search-card.all.click)
+
+正在补充...
+
+
+
+
+#### SpringSecurity学习
+
+正在补充...
+
+#### webScoket学习
+
+正在补充...
+
+#### Mybatis-Plus学习测试案例
+正在补充...
+
+
+#### JWT和Token的学习和理解
+正在补充...
+
