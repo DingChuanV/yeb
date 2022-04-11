@@ -30,7 +30,11 @@ https://github.com/bearbrick0/rabbitmq
 
 #### SpringSecurity学习
 
-https://www.cnblogs.com/bearbrick0/p/16129311.html
+介绍SpringSecurity：https://www.cnblogs.com/bearbrick0/p/16129311.html
+
+SpringSecurty中的CSRF在工作中的使用方式：https://www.cnblogs.com/bearbrick0/p/16130738.html
+
+SpringSecurty_demo整体的代码仓库：https://github.com/bearbrick0/springsecurity_demo
 
 #### webScoket学习
 
