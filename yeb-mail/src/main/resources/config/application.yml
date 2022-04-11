@@ -1,6 +1,6 @@
 server:
   #端口
-  port: 8082
+  port: 8083
 spring:
   #邮箱配置
   mail:
@@ -19,10 +19,10 @@ spring:
 
   #rabbitmq配置
   rabbitmq:
-    username: root
-    password: root
-    host: 192.168.121.129
-    port: 15672
+    username: admin
+    password: admin
+    host: localhost
+    port: 5672
     listener:
       simple:
         acknowledge-mode: manual

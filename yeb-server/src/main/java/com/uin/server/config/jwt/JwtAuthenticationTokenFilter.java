@@ -1,4 +1,4 @@
-package com.uin.server.config.security.jwt;
+package com.uin.server.config.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**  JWT 登录授权过滤器
+/**
  * \* Created with IntelliJ IDEA.
  * \* @author wanglufei
  * \* Date: 2021年08月07日 11:00
- * \* Description:
+ * \* Description:JWT 登录授权过滤器
  * \
  */
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {

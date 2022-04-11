@@ -23,7 +23,9 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * UserDetails 实现SpringSecurity
+ * admin实现UserDetails
+ * 去自定义实现username，password。去实现认证
+ * 实现SpringSecurity
  * </p>
  *
  * @author wanglufei

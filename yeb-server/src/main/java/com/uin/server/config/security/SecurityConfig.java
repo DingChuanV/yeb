@@ -2,9 +2,9 @@ package com.uin.server.config.security;
 
 import com.uin.server.config.filter.CustomFilter;
 import com.uin.server.config.filter.CustomUrlDecisionManager;
-import com.uin.server.config.security.jwt.JwtAuthenticationTokenFilter;
-import com.uin.server.config.security.jwt.RestAuthorizationEntryPoint;
-import com.uin.server.config.security.jwt.RestfulAccessDeniedHandler;
+import com.uin.server.config.jwt.JwtAuthenticationTokenFilter;
+import com.uin.server.config.jwt.RestAuthorizationEntryPoint;
+import com.uin.server.config.jwt.RestfulAccessDeniedHandler;
 import com.uin.server.pojo.Admin;
 import com.uin.server.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * \* Description: SpringSecurity配置类
  * \
  */
+//WebSecurityConfigurerAdapter 自定义登陆界面
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -69,21 +70,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         );
     }
 
-
+    /**
+     * extends WebSecurityConfigurerAdapter
+     * 自定义安全防护，解决跨站请求伪造
+     *
+     * @param http
+     * @author wanglufei
+     * @date 2022/4/10 7:24 PM
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
+        //http.csrf().disable() 就相当于关闭防火墙
+        http.csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                //授权
                 .authorizeRequests()
                 //允许登录访问
-//                .antMatchers("/login", "/logout") //跨域请求先进行一次options请求
-//                .permitAll()
-                //除了上面的两个请求其他的都需要认证
-                .anyRequest()
-                .authenticated()
+                //.antMatchers("/login", "/logout") //跨域请求先进行一次options请求
+                //.permitAll()//除了上面的两个请求其他的都需要认证
+
+                //任何请求都需要认证
+                .anyRequest().authenticated()
                 //动态权限配置
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
@@ -128,17 +137,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
+            //去数据库查询
             Admin admin = adminService.getAdminByUserName(username);
             if (admin != null) {
                 admin.setRoles(adminService.getRoles(admin.getId()));
                 return admin;
-            }
+            }//否则就抛出用户找不到
             throw new UsernameNotFoundException("用户名或密码不正确");
         };
     }
 
     /**
      * 自定义登陆逻辑-密码解码和加密
+     * 在Spring容器中实现BCryptPasswordEncoder实例
      *
      * @return org.springframework.security.crypto.password.PasswordEncoder
      * @author wanglufei

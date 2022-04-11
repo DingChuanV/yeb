@@ -2,7 +2,7 @@ package com.uin.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.uin.server.config.security.jwt.JwtTokenUtil;
+import com.uin.server.config.jwt.JwtTokenUtil;
 import com.uin.server.mapper.AdminMapper;
 import com.uin.server.mapper.AdminRoleMapper;
 import com.uin.server.mapper.RoleMapper;
@@ -72,7 +72,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
         //登录
-        //查询数据库判断用户是否存在
+        //因为在在Security中重写了userDetailsService方法，让它根据用户输入的username去数据库查询，而不是SpringSecurity中的username
+        //去登陆。也就实现了自定义的登陆逻辑。
+        //loadUserByUsername
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
         //!passwordEncoder.matches(password, userDetails.getPassword())
         //数据库中已经加密的密码和用户传过来的明文密码在加密 进行匹配

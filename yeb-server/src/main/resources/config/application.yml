@@ -5,7 +5,7 @@ spring:
   datasource:
     #type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/yeb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai"
+    url: jdbc:mysql://localhost:3306/yeb?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 12345678
 
@@ -44,11 +44,11 @@ spring:
   # rabbitmq配置
   rabbitmq:
     # 用户名
-    username: root
+    username: admin
     # 密码
-    password: root
+    password: admin
     # 服务器地址
-    host: 192.168.121.129
+    host: localhost
     # 端口
     port: 15672
     # 消息失败回调
@@ -61,7 +61,7 @@ mybatis-plus:
   #  配置Mapper映射文件
   mapper-locations: classpath*:/mapper/*Mapper.xml
   #配置mybatis数据返回类型别名
-  type-aliases-package: com.yun.server.pojo
+  type-aliases-package: com.uin.server.pojo
 
   configuration:
     # 自动驼峰命名
@@ -69,7 +69,7 @@ mybatis-plus:
 #mybaits sql 打印（方法的所在的包 不是Mapper.xml所在的包）
 logging:
   level:
-    com.yun.server.mapper: debug
+    com.uin.server.mapper: debug
 
 jwt:
   # Jwt存储的请求头 授权
