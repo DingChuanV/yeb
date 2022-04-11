@@ -15,7 +15,10 @@
 
 #### RabbitMQ教学视频笔记和源码
 
+https://www.cnblogs.com/bearbrick0/category/2098894.html
+https://github.com/bearbrick0/rabbitmq
 
+具体使用干啥了，正在补充.....
 
 
 #### 分布式文件系统FastDFS学习
@@ -25,18 +28,17 @@
 正在补充...
 
 
-
-
 #### SpringSecurity学习
 
-正在补充...
+https://www.cnblogs.com/bearbrick0/p/16129311.html
 
 #### webScoket学习
 
 正在补充...
 
 #### Mybatis-Plus学习测试案例
-正在补充...
+
+https://github.com/bearbrick0/mybatis_plus
 
 
 #### JWT和Token的学习和理解
