@@ -11,6 +11,14 @@ import lombok.NoArgsConstructor;
  * \* Description: 公共返回对象
  * \
  */
+
+/**
+ * 公共返回对象
+ * @author wanglufei
+ * @date 2022/4/12 9:32 PM
+ * @param null
+ * @return null
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
