@@ -24,30 +24,31 @@ public class JwtTokenUtil {
 
     /**
      * JWT包含三部分
-     *      1.header   头部
-     *      2.payload  负载
-     *      3.signature 签名
-     *
+     * 1.header   头部
+     * 2.payload  负载
+     * 3.signature 签名
+     * <p>
      * header 头部主要是描述JWT的基本信息，例如类型和加密啊算法。对头部的基本信息，也是jSON格式的字符串进行BASE64的加密
-     *        得到的是JwtToken的第一部分。
+     * 得到的是JwtToken的第一部分。
      * payload 负载 就是存放有效信息的地方。这个名字像是特指飞机上承载的货品。
-     *     这是标准注册的声明：
-     *          iss: jwt签发者
-     *          sub：jwt所面向的用户
-     *          aud：接收jwt的一方
-     *          exp：jwt的过期时间，这个过期时间必须要大于签发时间
-     *          nbf：定义在什么时间之前，该jwt都是不可用的。
-     *          iat: jwt的签发时间
-     *          jti：jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。
-     *   对这些声明进行BASE64加密，得到JwtToken的第二部分，每一部分的编码都用 . 隔开
+     * 这是标准注册的声明：
+     * iss: jwt签发者
+     * sub：jwt所面向的用户
+     * aud：接收jwt的一方
+     * exp：jwt的过期时间，这个过期时间必须要大于签发时间
+     * nbf：定义在什么时间之前，该jwt都是不可用的。
+     * iat: jwt的签发时间
+     * jti：jwt的唯一身份标识，主要用来作为一次性token，从而回避重放攻击。
+     * 对这些声明进行BASE64加密，得到JwtToken的第二部分，每一部分的编码都用 . 隔开
      * signature 签名 它里面有包含
-     *          1. header(是BASE64编码之后的)
-     *          2. payload(是BASE64编码之后的)
-     *          3. secret 盐
+     * 1. header(是BASE64编码之后的)
+     * 2. payload(是BASE64编码之后的)
+     * 3. secret 盐
      * 这个部分需要base64加密后的header和base64加密后的payload使用，连接組成的字符串，
      * 然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分
-     *
+     * <p>
      * JwtToken的组成就是 上面组合而成的
+     *
      * @author wanglufei
      * @date 2022/4/12 7:36 PM
      * @param null
@@ -72,9 +73,9 @@ public class JwtTokenUtil {
 
     /**
      * payload负载的声明（claims）
-     *
+     * <p>
      * 根据用户的信息生成token
-     *
+     * <p>
      * UserDetails是SpringSecurity中的UserDetails
      * 我们要想实现自定义登陆的逻辑
      * 只要在我们自己的User实现UserDetails，然后自定义登陆参数
@@ -93,16 +94,17 @@ public class JwtTokenUtil {
     }
 
     /**
-     *  从负载的声明信息 得到主体 也就是username
+     * 从负载的声明信息 得到主体 也就是username
      *
      * @param token
      * @return
      */
     public String getUserNameFromToken(String token) {
         String username;
-        //根据token拿取荷载
+        //根据token拿取负载
         Claims claims = getClaimsFromToken(token);
         try {
+            //负载拿去用户信息
             username = claims.getSubject();
         } catch (Exception e) {
             username = null;
@@ -112,6 +114,8 @@ public class JwtTokenUtil {
 
     /**
      * token是否有效
+     *
+     * 有效的标准✅一个是是否到了过期的时间，另一个是否可以从token中获取用户名
      *
      * @param token
      * @param userDetails
@@ -135,6 +139,8 @@ public class JwtTokenUtil {
 
     /**
      * 刷新token
+     * 刷新令牌（token）
+     * 这是一种 认证模式
      *
      * @param token
      * @return
@@ -147,6 +153,7 @@ public class JwtTokenUtil {
 
     /**
      * 判断token是否过期
+     * 这个是为真正生成token方法（generateToken）打辅助的
      *
      * @param token
      * @return
@@ -159,6 +166,7 @@ public class JwtTokenUtil {
 
     /**
      * 从中获取实效时间
+     * 这个是为真正生成token方法（generateToken）打辅助的
      *
      * @param token
      * @return
@@ -169,9 +177,9 @@ public class JwtTokenUtil {
     }
 
     /**
-     * 从token获取荷载
+     * 从token获取负载，为上面从负载获取信息，打主攻。
      *
-     * 解析JwtToken 获取声明主体
+     * 解析JwtToken 获取负载（负载里面就包含claims）
      *
      * @param token
      * @return
@@ -191,9 +199,9 @@ public class JwtTokenUtil {
 
     /**
      * 根据负载生成Token
-     *
+     * <p>
      * 使用Jwts.compact()生成JwtToken
-     *
+     * <p>
      * 这一步是真正的生成token
      *
      * @param claims
