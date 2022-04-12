@@ -80,18 +80,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //http.csrf().disable() 就相当于关闭防火墙
+        //http.csrf().disable() 就相当于关闭防火墙 它就是一种跨域认证
+        //因为我们使用了JWT 所以给他关了
         http.csrf().disable()
+
+                //基于token，不需要session
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
                 .and()
-                //授权
+
+                //授权请求
                 .authorizeRequests()
                 //允许登录访问
-                //.antMatchers("/login", "/logout") //跨域请求先进行一次options请求
-                //.permitAll()//除了上面的两个请求其他的都需要认证
+                .antMatchers("/login", "/logout") //跨域请求先进行一次options请求
+                .permitAll()//除了上面的两个请求其他的都需要认证
 
-                //任何请求都需要认证
+                //除了上面的 任何请求都需要认证
                 .anyRequest().authenticated()
 
                 //动态权限配置
@@ -104,14 +109,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .and()
+
                 //禁用缓存
-                .headers()
-                .cacheControl();
-        //添加jwt 登录授权过滤器
+                .headers().cacheControl();
+
+        //既然用了JWt我们要添加拦截器
+        //添加jwt 登录授权拦截器
         http.addFilterBefore(jwtAuthenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        //添加自定义未授权和未登录结果返回
+
+        //也就是用户没有登陆
+        //添加自定义 未授权 和 未登录 结果返回
         http.exceptionHandling()
+                //访问拒绝处理程序
                 .accessDeniedHandler(restfulAccessDeniedHandler)
+                //身份验证入口点
                 .authenticationEntryPoint(restAuthorizationEntryPoint);
     }
 
@@ -123,12 +134,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        //因为我们重写了UserDetailsService，所以我们要在AuthenticationManagerBuilder中配置
+        //当我们登陆的时候，他就会走我们自定义的登陆逻辑
         auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
     }
 
     /**
      * 自定义登陆逻辑-username
-     * 重写 UserDetailsService
+     * 重写 UserDetailsService以及loadUserByUsername(username) 实现自定义登陆逻辑
      *
      * @return org.springframework.security.core.userdetails.UserDetailsService
      * @author wanglufei
@@ -160,11 +173,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     /**
+     * Jwt 身份验证令牌过滤器
      *
+     * @return com.uin.server.config.jwt.JwtAuthenticationTokenFilter
      * @author wanglufei
      * @date 2022/4/11 12:05 PM
-     * @return com.uin.server.config.jwt.JwtAuthenticationTokenFilter
      */
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
