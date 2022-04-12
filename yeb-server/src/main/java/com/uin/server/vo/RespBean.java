@@ -14,18 +14,20 @@ import lombok.NoArgsConstructor;
 
 /**
  * 公共返回对象
+ *
  * @author wanglufei
  * @date 2022/4/12 9:32 PM
- * @param null
  * @return null
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RespBean {
-
+    //状态码
     private long code;
+    //响应消息
     private String message;
+    //返回的对象
     private Object obj;
 
     /**

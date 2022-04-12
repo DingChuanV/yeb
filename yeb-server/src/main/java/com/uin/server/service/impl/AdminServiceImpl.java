@@ -91,15 +91,19 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
             return RespBean.error("验证码填写错误");
         }
 
+        //登陆成功之后会将用户放在SpringSecurity中的UsernamePasswordAuthenticationToken去管理我们的用户
         //更新security登录用户对象
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        //SpringSecurity的安全上下文中
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         //生成token
         String token = jwtTokenUtil.generateToken(userDetails);
         Map<String, Object> tokenMap = new HashMap<>();
+        //返回token
         tokenMap.put("token", token);
+        //返回token的头部信息
         tokenMap.put("tokenHead", token);
         return RespBean.success("登录成功", tokenMap);
     }
@@ -117,6 +121,14 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      */
     @Override
     public Admin getAdminByUserName(String username) {
+        //selectOnemybatis-plus的单一查询方法
+        //QueryWrapper查询包装器
+        //.eq("username", username)
+        //第一个username是数据库的字段
+        //第二个是传入来的参数
+        //相当于 mybatis中的
+        //select * from user where username=#(username) and enabled=true;
+        //同时还可以增加一些健壮性判断
         return adminMapper.selectOne(new QueryWrapper<Admin>()
                 .eq("username", username)
                 .eq("enabled", true));
