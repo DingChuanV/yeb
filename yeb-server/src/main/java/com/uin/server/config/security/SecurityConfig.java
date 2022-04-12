@@ -93,6 +93,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //任何请求都需要认证
                 .anyRequest().authenticated()
+
                 //动态权限配置
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
@@ -159,7 +160,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    /**
+     *
+     * @author wanglufei
+     * @date 2022/4/11 12:05 PM
+     * @return com.uin.server.config.jwt.JwtAuthenticationTokenFilter
+     */
     @Bean
     public JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter() {
         return new JwtAuthenticationTokenFilter();

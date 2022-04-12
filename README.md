@@ -11,6 +11,41 @@
 ## 技术栈
 <img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204101420283.png" alt="image-20220410141656163" style="zoom:50%;" />
 
+## 登陆功能
+
+采用SpringSecurity+JwtToken实现登陆功能。
+### 添加依赖
+```xml
+        <!--security依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--Jwt依赖-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+```
+### 修改配置 application.yml
+
+```yaml
+jwt:
+  # Jwt存储的请求头 授权
+  tokenHeader: Authorization
+  # Jwt加密秘钥
+  secret: yeb-secret
+  # Jwt 的超期限时间（60*60）*24
+  expiration: 604800
+  # Jwt负载中拿到开头
+  tokenHead: Bearer
+```
+### 添加JwtTokenUtil工具类
+
+
+
+
 ## 相关技术学习
 
 #### RabbitMQ教学视频笔记和源码

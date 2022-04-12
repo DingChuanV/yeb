@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- * admin实现UserDetails
+ * admin实现UserDetails，实现自定义的登陆逻辑
  * 去自定义实现username，password。去实现认证
  * 实现SpringSecurity
  * </p>
@@ -73,6 +73,7 @@ public class Admin implements Serializable, UserDetails {
 
     @ApiModelProperty(value = "角色")
     @TableField(exist = false)
+    //说明一个用户对应多个角色
     private List<Role> roles;
 
     /**
@@ -82,7 +83,14 @@ public class Admin implements Serializable, UserDetails {
      * @author wanglufei
      * @date 2021/8/7 8:46
      */
-
+    /**
+     * 重写Collection<GrantedAuthority>里面放的是给授权的用户集合，不可以返回空
+     * 看来这里是根绝角色来授权的
+     *
+     * @return java.util.Collection<? extends org.springframework.security.core.GrantedAuthority>
+     * @author wanglufei
+     * @date 2022/4/12 8:00 PM
+     */
     @Override
     @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
