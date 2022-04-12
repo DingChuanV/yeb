@@ -13,38 +13,9 @@
 
 ## 登陆功能
 
-采用SpringSecurity+JwtToken实现登陆功能。
-### 添加依赖
-```xml
-        <!--security依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!--Jwt依赖-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.9.0</version>
-        </dependency>
-```
-### 修改配置 application.yml
+采用的技术是SpringSecurity+JWT。SpringSecurity主要解决的访问的控制和授权、使用Jwt生成的token对用户访问资源的的一种认证机制。
 
-```yaml
-jwt:
-  # Jwt存储的请求头 授权
-  tokenHeader: Authorization
-  # Jwt加密秘钥
-  secret: yeb-secret
-  # Jwt 的超期限时间（60*60）*24
-  expiration: 604800
-  # Jwt负载中拿到开头
-  tokenHead: Bearer
-```
-### 添加JwtTokenUtil工具类
-
-
-
+通过SpringSecurity的访问控制，使用户必须安全访问该系统，在实现自定义登录逻辑的基础上使用Jwt这种认证框架，使用户的认证（Token认证，对用户访问资源的一种机制）和授权（还是SpringSecurity做的，在用户通过我们自定义的登录逻辑之后，用户就被授权了）得到有效的解决。
 
 ## 相关技术学习
 
@@ -77,9 +48,17 @@ SpringSecurty_demo整体的代码仓库：https://github.com/bearbrick0/springse
 
 #### Mybatis-Plus学习测试案例
 
-https://github.com/bearbrick0/mybatis_plus
+
+自己学习的代码和测试案例：https://github.com/bearbrick0/mybatis_plus
 
 
-#### JWT和Token的学习和理解
-正在补充...
+#### JWT和OAuth2的学习和理解
+
+笔记：
+https://www.cnblogs.com/bearbrick0/p/16133119.html
+https://www.cnblogs.com/bearbrick0/p/16136429.html
+
+代码：我的仓库中有。
+
+
 
