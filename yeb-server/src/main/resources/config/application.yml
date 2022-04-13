@@ -33,7 +33,7 @@ spring:
     host: 127.0.0.1
     #端口
     port: 6379
-    database: 0 # 选择哪个库，默认0库
+    database: 1 # 选择哪个库，默认0库
 
     lettuce:
       pool:
@@ -77,6 +77,6 @@ jwt:
   # Jwt加密秘钥
   secret: yeb-secret
   # Jwt 的超期限时间（60*60）*24
-  expiration: 604800
+  expiration: 60480000
   # Jwt负载中拿到开头
   tokenHead: Bearer

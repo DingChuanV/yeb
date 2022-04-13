@@ -38,6 +38,21 @@
 
 接口文档的地址：https://www.cnblogs.com/bearbrick0/p/16138856.html
 
+
+## 🐧测试登陆（认证和授权）功能
+
+![image-20220413104039532](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204131040370.png)
+
+<img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204131048056.png" alt="image-20220413104257118" style="zoom:50%;" />
+
+这个tokenHead:我们配置的是Bearer，在配置文档里面写的。下面的是token。
+
+![image-20220413104704876](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204131048798.png)
+
+此时给用户授权。
+
+![image-20220413104800430](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204131048237.png)
+
 ## 🐓相关技术学习
 
 #### 🦩RabbitMQ教学视频笔记和源码

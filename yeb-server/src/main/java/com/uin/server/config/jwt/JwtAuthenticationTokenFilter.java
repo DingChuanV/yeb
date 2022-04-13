@@ -71,7 +71,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 //验证token是否有效,重新设置用户对象
-                if (jwtTokenUtil.validateToken(tokenHead, userDetails)) {
+                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                     //现在将用户放到SpringSecurity全局上下文中 要不然就一直
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));

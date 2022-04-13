@@ -91,8 +91,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //授权请求
                 .authorizeRequests()
                 //允许登录访问
-                .antMatchers("/login", "/logout") //跨域请求先进行一次options请求
-                .permitAll()//除了上面的两个请求其他的都需要认证
+                //.antMatchers("/login", "/logout") //跨域请求先进行一次options请求
+                //.permitAll()//除了上面的两个请求其他的都需要认证
 
                 //除了上面的 任何请求都需要认证
                 .anyRequest().authenticated()

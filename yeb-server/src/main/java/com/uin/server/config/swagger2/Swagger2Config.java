@@ -55,6 +55,13 @@ public class Swagger2Config {
                 .build();
     }
 
+    /**
+     * 设置请求头的信息
+     *
+     * @return java.util.List<springfox.documentation.service.ApiKey>
+     * @author wanglufei
+     * @date 2022/4/13 10:01 AM
+     */
     private List<ApiKey> securitySchemes() {
         List<ApiKey> result = new ArrayList<>();
         ApiKey apiKey = new ApiKey("Authorization", "Authorization", "Header");
@@ -62,7 +69,15 @@ public class Swagger2Config {
         return result;
     }
 
+    /**
+     * 配置SecurityContext全局上下文
+     *
+     * @return java.util.List<springfox.documentation.spi.service.contexts.SecurityContext>
+     * @author wanglufei
+     * @date 2022/4/13 10:02 AM
+     */
     private List<SecurityContext> securityContexts() {
+        //需要认证的路径
         List<SecurityContext> securityContexts = new ArrayList<>();
         securityContexts.add(getContextByPath("/hello/.*"));
         return securityContexts;
@@ -77,6 +92,7 @@ public class Swagger2Config {
 
     private List<SecurityReference> defaultAuth() {
         List<SecurityReference> result = new ArrayList<>();
+        //授权的范围
         AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
