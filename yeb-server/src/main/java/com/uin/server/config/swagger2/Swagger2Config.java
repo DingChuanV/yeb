@@ -1,4 +1,4 @@
-package com.uin.server.config.swagger;
+package com.uin.server.config.swagger2;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,19 +18,27 @@ import java.util.List;
  * \* Created with IntelliJ IDEA.
  * \* @author wanglufei
  * \* Date: 2021年08月07日 15:44
- * \* Description: Swagger 配置类
+ * \* Description: Swagger2 配置类
  * \
  */
 @Configuration
+//开启Swagger2注解
 @EnableSwagger2
 public class Swagger2Config {
-
+    /**
+     * 指定要扫描那些包下面的接口
+     *
+     * @return springfox.documentation.spring.web.plugins.Docket
+     * @author wanglufei
+     * @date 2022/4/13 8:41 AM
+     */
     @Bean
     public Docket createResApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.yun.server.controller"))
+                //包扫描
+                .apis(RequestHandlerSelectors.basePackage("com.uin.server.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(securityContexts())
@@ -41,7 +49,8 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("云E办接口文档")
                 .description("云E办接口文档")
-                .contact(new Contact("wanglufei", "http://localhost:8081//doc.html", "1634060836@qq.com"))
+                .contact(new Contact("wanglufei", "http://localhost:8082//doc.html", "1634060836" +
+                        "@qq.com"))
                 .version("1.0")
                 .build();
     }
