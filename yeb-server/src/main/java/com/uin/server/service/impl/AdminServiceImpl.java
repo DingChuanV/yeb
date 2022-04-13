@@ -71,6 +71,11 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      */
     @Override
     public RespBean login(String username, String password, String code, HttpServletRequest request) {
+        //验证验证码 减少数据库连接
+        String captcha = (String) request.getSession().getAttribute("captcha");
+        if (StringUtils.isEmpty(code) || !captcha.equals(code)) {
+            return RespBean.error("验证码填写错误");
+        }
         //登录
         //因为在在Security中重写了userDetailsService方法，让它根据用户输入的username去数据库查询，而不是SpringSecurity中的username
         //去登陆。也就实现了自定义的登陆逻辑。
@@ -84,11 +89,6 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         //判断账号是否被禁用
         if (!userDetails.isEnabled()) {
             return RespBean.error("账号被禁用");
-        }
-        //验证验证码
-        String captcha = (String) request.getSession().getAttribute("captcha");
-        if (StringUtils.isEmpty(code) || !captcha.equals(code)) {
-            return RespBean.error("验证码填写错误");
         }
 
         //登陆成功之后会将用户放在SpringSecurity中的UsernamePasswordAuthenticationToken去管理我们的用户
