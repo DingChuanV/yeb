@@ -30,6 +30,8 @@
 ## 🐔Swagger的相关配置
 
 因为是前后端分离的方式，所以我们要准备Swagger接口文档。（还提供接口调试的功能）。
+接口文档的地址：http://localhost:8082//doc.html
+
 
 接口文档的地址：https://www.cnblogs.com/bearbrick0/p/16138856.html
 
