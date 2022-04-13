@@ -3,8 +3,6 @@ package com.uin.server.config.security;
 import com.uin.server.config.filter.CustomFilter;
 import com.uin.server.config.filter.CustomUrlDecisionManager;
 import com.uin.server.config.jwt.JwtAuthenticationTokenFilter;
-import com.uin.server.config.jwt.RestAuthorizationEntryPoint;
-import com.uin.server.config.jwt.RestfulAccessDeniedHandler;
 import com.uin.server.pojo.Admin;
 import com.uin.server.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;

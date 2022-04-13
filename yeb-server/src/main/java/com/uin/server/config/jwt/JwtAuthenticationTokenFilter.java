@@ -65,14 +65,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             //根据Bearer 获取 用户名
             String username = jwtTokenUtil.getUserNameFromToken(authToken);
             //token存在,但是未登录
-            //如果username不为null 并且SpringSecurity中的上下文为null 说明是用户的第一次登陆 所以接下来让他登陆
+            //如果username不为null 并且SpringSecurity中的全局上下文为null 说明是用户的第一次登陆 所以接下来让他登陆
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 //此操作就相当于登录 是SpringSecurity中的登陆方法 我们自定义登陆的关键所在
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 //验证token是否有效,重新设置用户对象
-                if (jwtTokenUtil.validateToken(authToken, userDetails)) {
-                    //现在将用户放到SpringSecurity全局上下文中
+                if (jwtTokenUtil.validateToken(tokenHead, userDetails)) {
+                    //现在将用户放到SpringSecurity全局上下文中 要不然就一直
                     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
