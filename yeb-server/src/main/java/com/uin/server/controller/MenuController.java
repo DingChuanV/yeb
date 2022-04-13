@@ -23,12 +23,12 @@ import java.util.List;
 @RequestMapping("/system/cfg")
 public class MenuController {
     @Autowired
-    private IMenuService iMenuService;
+    private IMenuService menuService;
 
     @ApiOperation(value = "通过用户ID查询菜单列表")
     @GetMapping("/menu")
     public List<Menu> getMenusByAdminId() {
-        return iMenuService.getMenusByAdminId();
+        return menuService.getMenusByAdminId();
     }
 
 }

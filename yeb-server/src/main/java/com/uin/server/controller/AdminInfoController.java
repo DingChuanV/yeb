@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
@@ -51,6 +49,7 @@ public class AdminInfoController {
 
     @ApiOperation("更新用户图像")
     @PutMapping("/admin/userface")
+    @RequestMapping(value = "/admin/userface",method = RequestMethod.POST)
     public RespBean updateAdminUserface(MultipartFile multipartFile, Integer id,
                                         Authentication authentication) {
         String[] upload = FastdfsUtils.upload(multipartFile);
