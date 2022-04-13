@@ -30,7 +30,9 @@
 ## 🐔Swagger的相关配置
 
 因为是前后端分离的方式，所以我们要准备Swagger接口文档。（还提供接口调试的功能）。
-<img src="/Users/wanglufei/Library/Application Support/typora-user-images/image-20220413095356315.png" alt="image-20220413095356315" style="zoom:50%;" />
+
+![](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204130955021.png)
+
 接口文档的地址：http://localhost:8081//doc.html
 
 
