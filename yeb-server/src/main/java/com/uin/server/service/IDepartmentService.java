@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * <p>
- * 服务类
+ * 使用存储过程添加部门和删除部门
  * </p>
  *
  * @author wanglufei

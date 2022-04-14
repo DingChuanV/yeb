@@ -38,6 +38,7 @@ public class JoblevelController {
     @ApiOperation(value = "查询所有职称")
     @GetMapping("/")
     public List<Joblevel> getAllJoblevel() {
+        //查询所有
         return joblevelService.list();
     }
 
@@ -73,6 +74,7 @@ public class JoblevelController {
     @PutMapping("/")
     public RespBean updateJoblevel(@RequestBody Joblevel joblevel) {
         System.out.println(joblevel);
+        //根据 ID 选择修改
         if (joblevelService.updateById(joblevel)) {
             return RespBean.success("修改成功");
         }
@@ -92,6 +94,7 @@ public class JoblevelController {
     @ApiOperation(value = "删除职称")
     @DeleteMapping("/{id}")
     public RespBean deleteJobLevel(@PathVariable Integer id) {
+        //根据 ID 删除
         if (joblevelService.removeById(id)) {
             return RespBean.success("删除成功");
         }
@@ -110,6 +113,7 @@ public class JoblevelController {
     @ApiOperation(value = "批量删除职称")
     @DeleteMapping("/")
     public RespBean deleteJoblevelByIds(Integer[] ids) {
+        //removeByIds批量删除职称
         if (joblevelService.removeByIds(Arrays.asList(ids))) {
             return RespBean.success("删除成功");
         }

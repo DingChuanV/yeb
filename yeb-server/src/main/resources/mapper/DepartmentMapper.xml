@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.uin.server.mapper.DepartmentMapper">
 
     <!-- 通用查询映射结果 -->
@@ -13,7 +14,8 @@
     </resultMap>
 
     <!-- 相当于 递归查询 -->
-    <resultMap id="DepartmentWithChildren" type="com.uin.server.pojo.Department" extends="BaseResultMap">
+    <resultMap id="DepartmentWithChildren" type="com.uin.server.pojo.Department"
+               extends="BaseResultMap">
         <collection property="children" ofType="com.uin.server.pojo.Department"
                     select="com.uin.server.mapper.DepartmentMapper.getAllDepartments" column="id">
             <!-- SELECT * FROM t_department WHERE parent_id=-1
@@ -27,15 +29,17 @@
         id, name, parentId, depPath, enabled, isParent
     </sql>
 
+    <!--使用存储过程添加部门和删除部门-->
+
     <!-- 删除部门 : 调用存储过程 CALLABLE -->
     <delete id="deleteDep" statementType="CALLABLE">
-        call yeb.deleteDep(#{id,mode=IN,jdbcType=INTEGER},#{result,mode=OUT,jdbcType=INTEGER})
+        call yeb.deleteDep(#{id,mode=IN,jdbcType=INTEGER}, #{result,mode=OUT,jdbcType=INTEGER})
     </delete>
 
     <!-- 添加部门 : 调用存储过程 CALLABLE -->
     <select id="addDep" statementType="CALLABLE">
-        call yeb.addDep(#{name,mode=IN,jdbcType=VARCHAR},#{parentId,mode=IN,jdbcType=INTEGER},#{enabled,mode=IN,
-        jdbcType=BOOLEAN},#{result,mode=OUT,jdbcType=INTEGER},#{id,mode=OUT,jdbcType=INTEGER})
+        call yeb.addDep(#{name,mode=IN,jdbcType=VARCHAR}, #{parentId,mode=IN,jdbcType=INTEGER}, #{enabled,mode=IN,
+        jdbcType=BOOLEAN}, #{result,mode=OUT,jdbcType=INTEGER}, #{id,mode=OUT,jdbcType=INTEGER})
     </select>
     <!--获取所有部门-->
     <select id="getAllDepartments" resultMap="DepartmentWithChildren">

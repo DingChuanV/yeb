@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * \* Created with IntelliJ IDEA.
  * \* @author wanglufei
  * \* Date: 2021年08月09日 17:25
- * \* Description: 权限组
+ * \* Description: 权限组 管理角色、菜单、菜单的角色
  * \
  */
 @RestController
@@ -42,6 +42,7 @@ public class PermissionController {
     @ApiOperation(value = "添加角色")
     @PostMapping("/role")
     public RespBean addRole(@RequestBody Role role) {
+        //startsWith以ROLE_开头 这是SpringSecurty中规定的
         if (!role.getName().startsWith("ROLE_")) {
             role.setName("ROLE_" + role.getName());
         }
@@ -63,6 +64,7 @@ public class PermissionController {
     @ApiOperation(value = "获取所有菜单")
     @GetMapping("/menus")
     private List<Menu> getAllMenus(){
+        //菜单中还有子菜单
         return menuService.getAllMenus();
     }
 

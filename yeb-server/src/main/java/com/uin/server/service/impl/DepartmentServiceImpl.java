@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * <p>
- * 服务实现类
+ * 使用存储过程添加部门和删除部门
  * </p>
  *
  * @author wanglufei
@@ -70,13 +70,13 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     public RespBean deleteDep(Integer id) {
         Department dep = new Department();
         dep.setId(id);
-        if (-2==dep.getResult()) {
+        if (-2 == dep.getResult()) {
             return RespBean.error("删除失败，该部门下还有子部门！");
         }
-        if (-1==dep.getResult()) {
+        if (-1 == dep.getResult()) {
             return RespBean.error("删除失败，该部门下还有员工！");
         }
-        if (1==dep.getResult()) {
+        if (1 == dep.getResult()) {
             return RespBean.success("删除成功！");
         }
         return RespBean.error("删除失败！");
