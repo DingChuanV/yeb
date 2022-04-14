@@ -45,7 +45,7 @@ public interface IAdminService extends IService<Admin> {
     Admin getAdminByUserName(String username);
 
     /**
-     * 根据用户id查询角色列表
+     * 判断用户角色，根据用户id查询角色
      *
      * @param adminId
      * @param

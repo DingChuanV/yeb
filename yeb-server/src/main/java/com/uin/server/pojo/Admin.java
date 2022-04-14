@@ -72,8 +72,9 @@ public class Admin implements Serializable, UserDetails {
     private String remark;
 
     @ApiModelProperty(value = "角色")
+    //表示数据库中不存在该字段
     @TableField(exist = false)
-    //说明一个用户对应多个角色
+    //一个用户有多个角色
     private List<Role> roles;
 
     /**
@@ -94,10 +95,10 @@ public class Admin implements Serializable, UserDetails {
     @Override
     @JsonDeserialize(using = CustomAuthorityDeserializer.class)
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<SimpleGrantedAuthority> authorities = roles
-                .stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
+        List<SimpleGrantedAuthority> authorities =
+                //把上面角色中的名称给授权
+                roles.stream().map(role -> new SimpleGrantedAuthority(role.getName()))
+                        .collect(Collectors.toList());
         return authorities;
     }
 
