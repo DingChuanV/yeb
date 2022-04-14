@@ -55,6 +55,28 @@
 
 ![image-20220413104800430](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204131048237.png)
 
+## 🐒权限控制
+
+根据请求的url分析请求所需角色。
+
+判断用户角色。
+
+## 🐣推荐一个好用的插件
+
+我们在开发的时候，有时候会忘记一些Api的使用，我们通常会有两种办法，一种就是去百度，另一种就是command+b,进去看看，是怎么定义的。
+有时候会看到里面全是英文。
+这个时候，有个插件，可以看到英文，而且翻译的和原本英文要表达的意思差不多。
+
+![image-20220414101234036](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204141012394.png)
+
+<img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204141014517.png" alt="image-20220414101423864" style="zoom:50%;" />
+
+![image-20220414101509264](https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204141015380.png)
+
+个人感觉还是很ok的。
+
+
+
 ## 🐓相关技术学习
 
 #### 🦩RabbitMQ教学视频笔记和源码

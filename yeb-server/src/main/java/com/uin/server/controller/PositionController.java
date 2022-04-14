@@ -54,6 +54,7 @@ public class PositionController {
     @PostMapping("/")
     private RespBean addPosition(@RequestBody Position position) {
         position.setCreateDate(LocalDateTime.now());
+        //插入一条记录（选择字段，策略插入）
         if (positionService.save(position)) {
             return RespBean.success("添加成功");
         }
@@ -108,6 +109,9 @@ public class PositionController {
     @ApiOperation(value = "批量删除职位信息")
     @DeleteMapping("/")
     public RespBean deletePositionByIds(Integer[] ids) {
+        //删除（根据ID 批量删除）
+        //Params:
+        //idList – 主键ID列表
         if (positionService.removeByIds(Arrays.asList(ids))) {
             return RespBean.success("批量删除成功");
         }

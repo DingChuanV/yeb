@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *
+ *      职位
  * </p>
  *
  * @author wanglufei
@@ -23,9 +23,9 @@ import java.time.LocalDateTime;
 @Data
 @RequiredArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false,of = "name")
+@EqualsAndHashCode(callSuper = false, of = "name")
 @TableName("t_position")
-@ApiModel(value="Position对象", description="")
+@ApiModel(value = "Position对象", description = "")
 public class Position implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,7 +40,8 @@ public class Position implements Serializable {
     private String name;
 
     @ApiModelProperty(value = "创建时间")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    //自定义时间格式的配置
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Shanghai")
     private LocalDateTime createDate;
 
     @ApiModelProperty(value = "是否启用")
