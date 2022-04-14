@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * <p>
- * 前端控制器
+ * 员工控制器
  * </p>
  *
  * @author wanglufei
@@ -57,6 +57,10 @@ public class EmployeeController {
                                           @RequestParam(defaultValue = "10") Integer size,
                                           Employee employee,
                                           LocalDate[] beginDateScope) {
+        //currentPage 当前页
+        //size 要显示多少条
+        //employee
+        //beginDateScope 前端要的入职日期的范围
         return employeeService.getEmployeeByPage(currentPage, size, employee, beginDateScope);
     }
 

@@ -17,7 +17,7 @@ import java.time.LocalDate;
 
 /**
  * <p>
- *
+ * 员工
  * </p>
  *
  * @author wanglufei
@@ -143,6 +143,8 @@ public class Employee implements Serializable {
 
     @ApiModelProperty(value = "工资账套ID")
     private Integer salaryId;
+
+    //一对一的处理
 
     @ApiModelProperty(value = "民族")
     @TableField(exist = false)

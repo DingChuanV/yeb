@@ -89,6 +89,7 @@
     </sql>
     <!--获取所有员工分页查询-->
     <select id="getEmployeeByPage" resultMap="EmployeeInfo">
+
         select
         e.*,
         n.id as nid,

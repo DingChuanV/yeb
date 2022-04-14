@@ -18,7 +18,7 @@ import java.util.List;
  */
 public interface IEmployeeService extends IService<Employee> {
     /**
-     * 获取所有员工
+     * 获取所有员工 分页
      *
      * @param currentPage
      * @param size
