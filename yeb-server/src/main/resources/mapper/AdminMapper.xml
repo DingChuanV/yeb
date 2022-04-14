@@ -30,7 +30,7 @@
         id, name, phone, telephone, address, enabled, username, password, userFace, remark
     </sql>
 
-    <!-- 获取所有操作员 -->
+    <!-- 获取所有操作员和响应的角色-->
     <select id="getAllAdmins" resultMap="AdminWithRole">
         select
         a.*,

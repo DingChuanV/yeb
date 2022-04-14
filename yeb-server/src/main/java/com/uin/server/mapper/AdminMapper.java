@@ -2,6 +2,7 @@ package com.uin.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.uin.server.pojo.Admin;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,5 +27,5 @@ public interface AdminMapper extends BaseMapper<Admin> {
      * @author wanglufei
      * @date 2021/8/12 16:13
      */
-    List<Admin> getAllAdmins(Integer id, String keywords);
+    List<Admin> getAllAdmins(@Param("id") Integer id,@Param("keywords") String keywords);
 }

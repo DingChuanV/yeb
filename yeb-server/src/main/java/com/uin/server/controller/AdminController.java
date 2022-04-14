@@ -14,14 +14,14 @@ import java.util.List;
 
 /**
  * <p>
- * 前端控制器
+ * 操作员管理
  * </p>
  *
  * @author wanglufei
  * @since 2021-08-06
  */
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/system/admin")
 public class AdminController {
 
     @Autowired
