@@ -10,7 +10,7 @@ import java.util.List;
  * \* Created with IntelliJ IDEA.
  * \* @author wanglufei
  * \* Date: 2021年08月13日 10:49
- * \* Description: 分页公共返回对象
+ * \* Description: 分页的公共返回对象
  * \
  */
 @Data
