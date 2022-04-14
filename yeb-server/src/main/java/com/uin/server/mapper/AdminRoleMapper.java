@@ -2,6 +2,7 @@ package com.uin.server.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.uin.server.pojo.AdminRole;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -22,5 +23,5 @@ public interface AdminRoleMapper extends BaseMapper<AdminRole> {
      * @author wanglufei
      * @date 2021/8/13 10:26
      */
-    Integer addAdminRole(Integer adminId, Integer[] rids);
+    Integer addAdminRole(@Param("adminId") Integer adminId,@Param("rids") Integer[] rids);
 }

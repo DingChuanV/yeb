@@ -71,7 +71,7 @@ public class AdminController {
         return roleService.list();
     }
 
-    @ApiOperation("")
+    @ApiOperation("更新操作员角色")
     @PutMapping("/role")
     public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
         return adminService.updateAdminRole(adminId, rids);

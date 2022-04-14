@@ -22,6 +22,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -173,9 +174,12 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
      * @date 2021/8/13 10:24
      */
     @Override
+    @Transactional // 开启事务
     public RespBean updateAdminRole(Integer adminId, Integer[] rids) {
+        // 先删除全部，后调用方法重新全部添加
         adminRoleMapper.delete(new QueryWrapper<AdminRole>().eq("adminId", adminId));
         Integer result = adminRoleMapper.addAdminRole(adminId, rids);
+
         if (rids.length == result) {
             return RespBean.success("更新成功！");
         }
@@ -200,7 +204,7 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
         Admin admin = adminMapper.selectById(adminId);
         //因为输入密码是明文 所以要用到springsecurity的编码
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        //判读输入旧密码是否正确
+        // 比对密码，判断旧密码是否正确
         if (encoder.matches(oldPass, admin.getPassword())) {
             admin.setPassword(encoder.encode(pass));
             int result = adminMapper.updateById(admin);
