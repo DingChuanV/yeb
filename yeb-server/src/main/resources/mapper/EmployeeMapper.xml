@@ -36,6 +36,7 @@
         <result column="salaryId" property="salaryId"/>
     </resultMap>
 
+
     <resultMap id="EmployeeInfo" type="com.uin.server.pojo.Employee" extends="BaseResultMap">
         <association property="nation" javaType="com.uin.server.pojo.Nation">
             <id column="nid" property="id"/>

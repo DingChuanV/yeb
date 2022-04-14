@@ -61,6 +61,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         Page<Employee> page = new Page<>(currentPage, size);
 
         IPage<Employee> employeeIPage = employeeMapper.getEmployeeByPage(page, employee, beginDateScope);
+        //getTotal 当前满足条件总行数 getRecords 分页记录列表
         RespPageBean respPageBean = new RespPageBean(employeeIPage.getTotal(), employeeIPage.getRecords());
         return respPageBean;
     }
