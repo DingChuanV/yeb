@@ -56,6 +56,8 @@ public class Admin implements Serializable, UserDetails {
     private String address;
 
     @ApiModelProperty(value = "是否启用")
+    //不生成get方法
+
     @Getter(AccessLevel.NONE)
     private Boolean enabled;
 

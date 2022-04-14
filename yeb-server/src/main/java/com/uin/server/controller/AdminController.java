@@ -48,6 +48,7 @@ public class AdminController {
     @ApiOperation("更新操作员")
     @PutMapping("/")
     public RespBean updateAdmin(@RequestBody Admin admin) {
+
         if (adminService.updateById(admin)) {
             return RespBean.success("更新成功！");
         }
@@ -57,6 +58,7 @@ public class AdminController {
     @ApiOperation("删除操作员")
     @DeleteMapping("/{id}")
     public RespBean deleteAdmin(@PathVariable Integer id) {
+
         if (adminService.removeById(id)) {
             return RespBean.success("删除成功！");
         }
