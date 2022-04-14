@@ -91,6 +91,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
      */
     @Override
     public RespBean insertEmployee(Employee employee) {
+
         // 处理合同期限，保留2位小数
         LocalDate beginContract = employee.getBeginContract();
         LocalDate endContract = employee.getEndContract();
