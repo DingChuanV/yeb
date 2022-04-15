@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *
+ * 工资帐套
  * </p>
  *
  * @author wanglufei

@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
  */
 @Controller
 public class WebSocketController {
-
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
@@ -36,8 +35,7 @@ public class WebSocketController {
          * 2.消息队列
          * 3.消息对象
          */
-        simpMessagingTemplate.convertAndSendToUser(chatMsg.getTo(), "/queue/chat",
-                chatMsg);
+        simpMessagingTemplate.convertAndSendToUser(chatMsg.getTo(), "/queue/chat", chatMsg);
     }
 
 }

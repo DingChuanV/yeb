@@ -70,25 +70,35 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
      * @author wanglufei
      * @date 2021/8/19 19:46
      */
-
     @Override
     public void configureClientInboundChannel(ChannelRegistration registration) {
         registration.interceptors(new ChannelInterceptor() {
+            /**
+             * 处理预发送
+             */
             @Override
             public Message<?> preSend(Message<?> message, MessageChannel channel) {
                 StompHeaderAccessor accessor = MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-                //判断是否为连接，如果是，需要获取token，并且设置用户对象
-                if (StompCommand.CONNECT.equals(accessor.getCommand())){
+                /**
+                 * 判断是否为连接，如果是，需要获取token，并且设置用户对象
+                 */
+                if (StompCommand.CONNECT.equals(accessor.getCommand())) {
                     String token = accessor.getFirstNativeHeader("Auth-Token");
-                    if (!StringUtils.isEmpty(token)){
+                    if (!StringUtils.isEmpty(token)) {
                         String authToken = token.substring(tokenHead.length());
                         String username = jwtTokenUtil.getUserNameFromToken(authToken);
-                        //判断token中是否存在用户名
-                        if (!StringUtils.isEmpty(username)){
-                            //登录
+                        /**
+                         * 判断token中是否存在用户名
+                         */
+                        if (!StringUtils.isEmpty(username)) {
+                            /**
+                             * 登录
+                             */
                             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                            //验证token是否有效
-                            if (jwtTokenUtil.validateToken(authToken,userDetails)){
+                            /**
+                             * 验证token是否有效
+                             */
+                            if (jwtTokenUtil.validateToken(authToken, userDetails)) {
                                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null);
                                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                                 accessor.setUser(authenticationToken);

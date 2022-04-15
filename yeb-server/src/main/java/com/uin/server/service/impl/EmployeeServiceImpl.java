@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * <p>
@@ -104,8 +105,8 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
             /**
              * 将发送的消息落库 进行持久话的操作
              */
-            //String msgID = UUID.randomUUID().toString();
-            String msgID = "123456";
+            String msgID = UUID.randomUUID().toString();
+            //String msgID = "123456";
             /**
              * 测试幂等性的操作
              */
