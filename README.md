@@ -8,7 +8,7 @@
 
 包括职位管理、职称管理、部门管理、员工管理、工资管理、在线聊天等模块。项目中还会使用业界主流的第三方组件扩展大家的知识面和技能池。
 
-## 🐈技术栈
+## 🐽技术栈
 <img src="https://bearbrick0.oss-cn-qingdao.aliyuncs.com/images/img/202204101420283.png" alt="image-20220410141656163" style="zoom:50%;" />
 
 ## 🐕登陆功能
