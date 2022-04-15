@@ -9,7 +9,7 @@ import com.uin.server.mapper.MailLogMapper;
 import com.uin.server.pojo.Employee;
 import com.uin.server.pojo.MailLog;
 import com.uin.server.service.IEmployeeService;
-import com.uin.server.vo.MailConstants;
+import com.uin.server.pojo.MailConstants;
 import com.uin.server.vo.RespBean;
 import com.uin.server.vo.RespPageBean;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -99,10 +99,11 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         DecimalFormat decimalFormat = new DecimalFormat("##.00");
         employee.setContractTerm(Double.parseDouble(decimalFormat.format(days / 365.00)));
         if (1 == employeeMapper.insert(employee)) {
+            //发送消息
             Employee emp = employeeMapper.getEmployee(employee.getId()).get(0);
             //发送邮件Employee要实现序列化
 
-            //将发送的消息入库 进行持久话的操作
+            //将发送的消息落库 进行持久话的操作
             String msgID = UUID.randomUUID().toString();
             MailLog mailLog = new MailLog();
             mailLog.setMsgId(msgID);
@@ -117,7 +118,7 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
             mailLogMapper.insert(mailLog);
 
             //发送信息
-            //交换机、路由key
+            //交换机、路由key、消息（也就是添加员工的数据）、msgId
             rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, emp, new CorrelationData(msgID));
             return RespBean.success("添加成功");
         }

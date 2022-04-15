@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- *
+ *  邮件对象的实体类
  * </p>
  *
  * @author wanglufei

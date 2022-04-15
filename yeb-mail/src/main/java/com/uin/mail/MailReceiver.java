@@ -3,7 +3,7 @@ package com.uin.mail;
 
 import com.rabbitmq.client.Channel;
 import com.uin.server.pojo.Employee;
-import com.uin.server.vo.MailConstants;
+import com.uin.server.pojo.MailConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;

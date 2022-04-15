@@ -118,10 +118,10 @@ URL（统一资源定位符）：可以提供找到某个资源的路径，比�
 
 #### 🦩RabbitMQ教学视频笔记和源码
 
-https://www.cnblogs.com/bearbrick0/category/2098894.html
-https://github.com/bearbrick0/rabbitmq
+rabbitMQ学习笔记:https://www.cnblogs.com/bearbrick0/category/2098894.html
+代码：https://github.com/bearbrick0/rabbitmq
 
-具体使用干啥了，正在补充.....
+https://www.cnblogs.com/bearbrick0/p/16147949.html
 
 
 #### 🐇分布式文件系统FastDFS学习

@@ -1,6 +1,6 @@
 package com.uin.mail;
 
-import com.uin.server.vo.MailConstants;
+import com.uin.server.pojo.MailConstants;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,6 +29,9 @@ public class MailApplication {
      */
     @Bean
     public Queue queue() {
+        /**
+         * 队列的名字
+         */
         return new Queue(MailConstants.MAIL_QUEUE_NAME);
     }
 }
