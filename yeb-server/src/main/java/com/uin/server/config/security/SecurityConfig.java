@@ -1,8 +1,10 @@
 package com.uin.server.config.security;
 
-import com.uin.server.config.filter.CustomFilter;
-import com.uin.server.config.filter.CustomUrlDecisionManager;
-import com.uin.server.config.jwt.JwtAuthenticationTokenFilter;
+import com.uin.server.config.security.component.CustomFilter;
+import com.uin.server.config.security.component.CustomUrlDecisionManager;
+import com.uin.server.config.security.component.JwtAuthenticationTokenFilter;
+import com.uin.server.config.security.component.RestAuthorizationEntryPoint;
+import com.uin.server.config.security.component.RestfulAccessDeniedHandler;
 import com.uin.server.pojo.Admin;
 import com.uin.server.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -175,7 +177,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * Jwt 身份验证令牌过滤器
      *
-     * @return com.uin.server.config.jwt.JwtAuthenticationTokenFilter
+     * @return com.uin.server.config.security.component.JwtAuthenticationTokenFilter
      * @author wanglufei
      * @date 2022/4/11 12:05 PM
      */

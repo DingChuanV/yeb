@@ -4,16 +4,16 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
 /**
- * \* Created with IntelliJ IDEA.
- * \* @author wanglufei
- * \* Date: 2021年08月06日 18:33
- * \* Description:
- * \
+ *
+ * @author wanglufei
+ * @date 2022/4/15 1:22 PM
  */
 @SpringBootApplication
 @MapperScan("com.uin.server.mapper")
+/**
+ * 开启定时任务
+ */
 @EnableScheduling
 public class YebApplication {
     public static void main(String[] args) {

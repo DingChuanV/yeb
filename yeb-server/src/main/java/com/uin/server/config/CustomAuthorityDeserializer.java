@@ -18,7 +18,11 @@ import java.util.List;
  * \* Created with IntelliJ IDEA.
  * \* @author wanglufei
  * \* Date: 2021年08月21日 19:55
- * \* Description: 自定义Authority解析器 自定义json序列化
+ * \* Description:
+ * <p>
+ * 自定义 json 序列化
+ * *  自定义 Authority 解析器
+ * *  反序列化方法
  * \
  */
 public class CustomAuthorityDeserializer extends JsonDeserializer {
@@ -29,6 +33,7 @@ public class CustomAuthorityDeserializer extends JsonDeserializer {
         ObjectMapper mapper = (ObjectMapper) jsonParser.getCodec();
         JsonNode jsonNode = mapper.readTree(jsonParser);
         List<GrantedAuthority> grantedAuthorityList = new LinkedList<>();
+        //迭代器
         Iterator<JsonNode> elements = jsonNode.elements();
         while (elements.hasNext()) {
             JsonNode next = elements.next();

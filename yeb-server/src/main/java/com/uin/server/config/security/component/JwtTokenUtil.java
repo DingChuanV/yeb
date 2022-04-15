@@ -1,4 +1,4 @@
-package com.uin.server.config.jwt;
+package com.uin.server.config.security.component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

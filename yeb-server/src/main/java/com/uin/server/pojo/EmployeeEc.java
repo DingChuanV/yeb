@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 /**
  * <p>
- *
+ * 员工奖惩
  * </p>
  *
  * @author wanglufei
@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_employee_ec")
-@ApiModel(value="EmployeeEc对象", description="")
+@ApiModel(value = "EmployeeEc对象", description = "")
 public class EmployeeEc implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.uin.server.config.jwt;
+package com.uin.server.config.security.component;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

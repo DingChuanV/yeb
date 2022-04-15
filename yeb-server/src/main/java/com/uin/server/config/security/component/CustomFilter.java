@@ -1,4 +1,4 @@
-package com.uin.server.config.filter;
+package com.uin.server.config.security.component;
 
 import com.uin.server.pojo.Menu;
 import com.uin.server.pojo.Role;

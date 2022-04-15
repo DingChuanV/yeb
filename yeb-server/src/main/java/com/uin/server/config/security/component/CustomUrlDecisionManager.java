@@ -1,4 +1,4 @@
-package com.uin.server.config.filter;
+package com.uin.server.config.security.component;
 
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDeniedException;

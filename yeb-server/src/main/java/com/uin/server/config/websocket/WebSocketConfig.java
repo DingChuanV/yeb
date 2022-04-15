@@ -1,6 +1,6 @@
 package com.uin.server.config.websocket;
 
-import com.uin.server.config.jwt.JwtTokenUtil;
+import com.uin.server.config.security.component.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;

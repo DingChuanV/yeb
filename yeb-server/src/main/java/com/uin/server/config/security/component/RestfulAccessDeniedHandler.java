@@ -1,4 +1,4 @@
-package com.uin.server.config.security;
+package com.uin.server.config.security.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.uin.server.vo.RespBean;

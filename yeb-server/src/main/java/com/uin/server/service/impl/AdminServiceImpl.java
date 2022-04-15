@@ -2,7 +2,7 @@ package com.uin.server.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.uin.server.config.jwt.JwtTokenUtil;
+import com.uin.server.config.security.component.JwtTokenUtil;
 import com.uin.server.mapper.AdminMapper;
 import com.uin.server.mapper.AdminRoleMapper;
 import com.uin.server.mapper.RoleMapper;
