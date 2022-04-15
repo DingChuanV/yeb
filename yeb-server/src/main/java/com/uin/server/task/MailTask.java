@@ -7,6 +7,8 @@ import com.uin.server.pojo.MailLog;
 import com.uin.server.service.IEmployeeService;
 import com.uin.server.service.IMailLogService;
 import com.uin.server.pojo.MailConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ import java.util.List;
  */
 @Component
 public class MailTask {
+
+    public static final Logger logger = LoggerFactory.getLogger(MailTask.class);
     /**
      * 用来获取所有的数据库中的消息
      */
@@ -72,6 +76,7 @@ public class MailTask {
              *
              */
             Employee employee = employeeService.getEmployee(mailLog.getEid()).get(0);
+            logger.info("{}",employee);
             System.out.println("MailTask:employee=" + employee);
             System.out.println("MailTask:msgId=" + mailLog.getMsgId());
             /**

@@ -47,6 +47,9 @@ public class MailReceiver {
     private RedisTemplate redisTemplate;
 
     @RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)// 监听 队列
+    /**
+     * Message
+     */
     public void handler(Message message, Channel channel) {// Channel 信道
         // 获取员工类   getPayload消息负载
         Employee employee = (Employee) message.getPayload();
@@ -59,31 +62,49 @@ public class MailReceiver {
         String msgId = (String) headers.get("spring_returned-message_correlation");
 
         System.out.println("msgId=" + msgId);
+        /**
+         * 使用redis存储hash的数据结构存储<key,value>
+         *     <msgId,ok>
+         */
         HashOperations hash = redisTemplate.opsForHash();
         try {
-            // 看 redis hashOperations 里面包不包含 对应的 msgId
+            /**
+             * 看 redis hashOperations 里面包不包含 对应的 msgId
+             */
             if (hash.entries("mail_log").containsKey(msgId)) {
-                //redis中包含key，说明消息已经被消费
-                logger.error("消息已经被消费======>{}" + msgId);
+                /**
+                 * redis中包含key，说明消息已经被消费
+                 */
+                logger.error("邮件已经发送过了======>{}" + msgId);
                 /**
                  * 手动确认消息
-                 *  tag：消息序号
-                 *  multiple: 是否确认多条,false 确认1条
+                 *  tag：消息的序号
+                 *  multiple: 是否确认多条，false 确认1条
                  */
                 channel.basicAck(tag, false);
                 return;
             }
             MimeMessage msg = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(msg);
-            //发件人
+            /**
+             * 发件人
+             */
             helper.setFrom(mailProperties.getUsername());
-            //收件人
+            /**
+             * 收件人
+             */
             helper.setTo(employee.getEmail());
-            //主题
+            /**
+             * 主题
+             */
             helper.setSubject("入职邮件");
-            //发送日期
+            /**
+             * 发送日期
+             */
             helper.setSentDate(new Date());
-            //邮件内容
+            /**
+             * 邮件内容
+             */
             Context context = new Context();
             context.setVariable("name", employee.getName());
             context.setVariable("posName", employee.getPosition().getName());
@@ -94,16 +115,28 @@ public class MailReceiver {
              */
             String mail = templateEngine.process("main", context);
             helper.setText(mail, true);
-            //发送邮件
+            /**
+             * 发送邮件
+             */
             javaMailSender.send(msg);
             logger.info("邮件发送成功");
-            //将消息id存入redis
+            /**
+             * 将消息id存入redis
+             */
             hash.put("mail_log", msgId, "ok");
             System.out.println("MailReceiver:redis--->msgId=" + msgId);
-            //手动确认消息
+            /**
+             * 手动确认消息
+             */
             channel.basicAck(tag, false);
         } catch (MessagingException | IOException e) {
             try {
+                /**
+                 * 手动确认
+                 *  tag 消息的序号
+                 *  multiple 取消批量
+                 *  requeue 需要重新入队
+                 */
                 channel.basicNack(tag, false, true);
             } catch (IOException ioException) {
                 logger.error("消息确认失败=====>{}", ioException.getMessage());

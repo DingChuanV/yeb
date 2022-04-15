@@ -7,9 +7,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.uin.server.mapper.EmployeeMapper;
 import com.uin.server.mapper.MailLogMapper;
 import com.uin.server.pojo.Employee;
+import com.uin.server.pojo.MailConstants;
 import com.uin.server.pojo.MailLog;
 import com.uin.server.service.IEmployeeService;
-import com.uin.server.pojo.MailConstants;
 import com.uin.server.vo.RespBean;
 import com.uin.server.vo.RespPageBean;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * <p>
@@ -102,9 +101,14 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
             //发送消息
             Employee emp = employeeMapper.getEmployee(employee.getId()).get(0);
             //发送邮件Employee要实现序列化
-
-            //将发送的消息落库 进行持久话的操作
-            String msgID = UUID.randomUUID().toString();
+            /**
+             * 将发送的消息落库 进行持久话的操作
+             */
+            //String msgID = UUID.randomUUID().toString();
+            String msgID = "123456";
+            /**
+             * 测试幂等性的操作
+             */
             MailLog mailLog = new MailLog();
             mailLog.setMsgId(msgID);
             mailLog.setEid(emp.getId());
