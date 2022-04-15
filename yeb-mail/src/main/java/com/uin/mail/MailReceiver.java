@@ -29,7 +29,7 @@ import java.util.Date;
  * \* Created with IntelliJ IDEA.
  * \* @author wanglufei
  * \* Date: 2021年08月18日 14:31
- * \* Description:  消息接受者
+ * \* Description:  邮件发给谁  谁发的 消息接受者
  * \
  */
 @Component
@@ -46,25 +46,29 @@ public class MailReceiver {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)
-    public void handler(Message message, Channel channel) {
-
+    @RabbitListener(queues = MailConstants.MAIL_QUEUE_NAME)// 监听 队列
+    public void handler(Message message, Channel channel) {// Channel 信道
+        // 获取员工类   getPayload消息负载
         Employee employee = (Employee) message.getPayload();
         System.out.println("MailReceiver: employee=" + employee);
+
         MessageHeaders headers = message.getHeaders();
-        Long tag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
+        // 消息序号; tag 手动确认的时候返回
+        long tag = (long) headers.get(AmqpHeaders.DELIVERY_TAG);
         System.out.println("tag=" + tag);
         String msgId = (String) headers.get("spring_returned-message_correlation");
+
         System.out.println("msgId=" + msgId);
         HashOperations hash = redisTemplate.opsForHash();
         try {
+            // 看 redis hashOperations 里面包不包含 对应的 msgId
             if (hash.entries("mail_log").containsKey(msgId)) {
                 //redis中包含key，说明消息已经被消费
-                logger.info("消息已经被消费======>" + msgId);
+                logger.error("消息已经被消费======>{}" + msgId);
                 /**
                  * 手动确认消息
                  *  tag：消息序号
-                 *  multiple:是否多条
+                 *  multiple: 是否确认多条,false 确认1条
                  */
                 channel.basicAck(tag, false);
                 return;

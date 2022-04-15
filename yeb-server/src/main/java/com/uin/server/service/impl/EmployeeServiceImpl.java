@@ -100,7 +100,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
         employee.setContractTerm(Double.parseDouble(decimalFormat.format(days / 365.00)));
         if (1 == employeeMapper.insert(employee)) {
             Employee emp = employeeMapper.getEmployee(employee.getId()).get(0);
-            //数据库发送的信息
+            //发送邮件Employee要实现序列化
+
+            //将发送的消息入库 进行持久话的操作
             String msgID = UUID.randomUUID().toString();
             MailLog mailLog = new MailLog();
             mailLog.setMsgId(msgID);
@@ -113,7 +115,9 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee> i
             mailLog.setCreateTime(LocalDateTime.now());
             mailLog.setUpdateTime(LocalDateTime.now());
             mailLogMapper.insert(mailLog);
+
             //发送信息
+            //交换机、路由key
             rabbitTemplate.convertAndSend(MailConstants.MAIL_EXCHANGE_NAME, MailConstants.MAIL_ROUTING_KEY_NAME, emp, new CorrelationData(msgID));
             return RespBean.success("添加成功");
         }
