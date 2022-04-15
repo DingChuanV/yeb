@@ -89,7 +89,7 @@ public class MailReceiver {
             context.setVariable("posName", employee.getPosition().getName());
             context.setVariable("joblevelName", employee.getJoblevel().getName());
             context.setVariable("departmentName", employee.getDepartment().getName());
-            String mail = templateEngine.process("mail", context);
+            String mail = templateEngine.process("main", context);
             helper.setText(mail, true);
             //发送邮件
             javaMailSender.send(msg);
