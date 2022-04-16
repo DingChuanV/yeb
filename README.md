@@ -128,8 +128,7 @@ https://www.cnblogs.com/bearbrick0/p/16147949.html
 
 [2021B站最新FastDFS教程 --分布式文件系统FastDFS入门到实战视频精讲_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1gh411z7kJ?spm_id_from=333.337.search-card.all.click)
 
-正在补充...
-
+https://www.aliyundrive.com/s/pa3bNw3HMJ7
 
 #### 🦢SpringSecurity学习
 
@@ -141,7 +140,7 @@ SpringSecurty_demo整体的代码仓库：https://github.com/bearbrick0/springse
 
 #### 🦚webScoket学习
 
-正在补充...
+博客地址
 
 #### 🐁Mybatis-Plus学习测试案例
 
